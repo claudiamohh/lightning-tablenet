@@ -9,12 +9,11 @@ from albumentations import Compose
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 
+
 class MarmotDataset(Dataset):
     """Custom Dataset with Marmot Dataset."""
 
-    def __init__(
-        self, data=List[Path], transforms: Compose = None
-    ) -> None:  
+    def __init__(self, data=List[Path], transforms: Compose = None) -> None:
         """
         Args:
             data (List[Path]): A list of Path
@@ -58,10 +57,10 @@ class MarmotDataset(Dataset):
         image_path = self.data[item]
         table_path = self.data[item].parent.parent.joinpath(
             "table_mask", unique_filename + ".bmp"
-        )  
+        )
         column_path = self.data[item].parent.parent.joinpath(
             "column_mask", unique_filename + ".bmp"
-        )  
+        )
 
         image = np.array(Image.open(image_path))
         table_mask = np.expand_dims(np.array(Image.open(table_path)), axis=2)
@@ -79,6 +78,7 @@ class MarmotDataset(Dataset):
         mask_table = sample["mask"][:, :, 1].unsqueeze(0)
         mask_column = sample["mask"][:, :, 1].unsqueeze(0)
         return image, mask_table, mask_column
+
 
 class Lightning_MarmotDataset(pl.LightningDataModule):
     """To create a Lightning Marmot Dataset from Marmot Dataset"""
@@ -104,9 +104,7 @@ class Lightning_MarmotDataset(pl.LightningDataModule):
         """
 
         super().__init__()
-        self.data = list(
-            Path(data_dir).rglob("*.bmp")
-        )  
+        self.data = list(Path(data_dir).rglob("*.bmp"))
         self.train_transform = train_transform
         self.test_transform = test_transform
         self.batch_size = batch_size
@@ -125,27 +123,21 @@ class Lightning_MarmotDataset(pl.LightningDataModule):
             stage(Optional[str]): Used to seperate setup logic for trainer.fit and trainer.test
         """
 
-        n_samples = len(self.data)  
-        self.data.sort()  
-        train_size = slice(
-            0, int(n_samples * 0.8)
-        )  
-        val_size = slice(
-            int(n_samples * 0.8), int(n_samples * 0.9)
-        )  
-        test_size = slice(
-            int(n_samples * 0.9), n_samples
-        )  
+        n_samples = len(self.data)
+        self.data.sort()
+        train_size = slice(0, int(n_samples * 0.8))
+        val_size = slice(int(n_samples * 0.8), int(n_samples * 0.9))
+        test_size = slice(int(n_samples * 0.9), n_samples)
 
         self.dataset_train = MarmotDataset(
             self.data[train_size], transforms=self.train_transform
-        )  
+        )
         self.dataset_val = MarmotDataset(
             self.data[val_size], transforms=self.test_transform
-        )  
+        )
         self.dataset_test = MarmotDataset(
             self.data[test_size], transforms=self.test_transform
-        )  
+        )
 
     def train_dataloader(self, *args, **kwargs) -> DataLoader:
         return DataLoader(

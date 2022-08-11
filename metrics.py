@@ -31,6 +31,7 @@ class DiceLoss(nn.Module):
 
         return 1 - dice
 
+
 def binary_mean_iou(inputs, targets):
     """
     Calculate binary mean intersection over union.

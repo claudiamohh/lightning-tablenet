@@ -4,7 +4,8 @@ from torch import nn, optim
 from torch.nn import functional as F
 from torchvision.models import vgg19, vgg19_bn
 
-EPSILON = 1e-15  
+EPSILON = 1e-15
+
 
 class TableNet(nn.Module):
     """
@@ -33,9 +34,7 @@ class TableNet(nn.Module):
         )
         self.pooling_layers = [26, 39] if encoder == "vgg_bn" else [18, 27]
         self.model = nn.Sequential(
-            nn.Conv2d(
-                512, 512, kernel_size=1
-            ),
+            nn.Conv2d(512, 512, kernel_size=1),
             nn.ReLU(inplace=True),
             nn.Dropout(0.8),
             nn.Conv2d(512, 512, kernel_size=1),
@@ -66,9 +65,8 @@ class TableNet(nn.Module):
 
         x_table = self.table_decoder(x, results)
         x_column = self.column_decoder(x, results)
-        return torch.sigmoid(x_table), torch.sigmoid(
-            x_column
-        )  
+        return torch.sigmoid(x_table), torch.sigmoid(x_column)
+
 
 class ColumnDecoder(nn.Module):
     """
@@ -81,32 +79,27 @@ class ColumnDecoder(nn.Module):
     def __init__(self, num_classes: int):
         super().__init__()
         self.decoder = nn.Sequential(
-            nn.Conv2d(512, 512, kernel_size=1),  
+            nn.Conv2d(512, 512, kernel_size=1),
             nn.ReLU(inplace=True),
             nn.Dropout(0.8),
-            nn.Conv2d(512, 512, kernel_size=1), 
+            nn.Conv2d(512, 512, kernel_size=1),
             nn.ReLU(inplace=True),
         )
         self.transpose_layer = nn.ConvTranspose2d(
             1280, num_classes, kernel_size=2, stride=2, dilation=1
-        )  
+        )
 
     def forward(self, x, pools):
         pool_3, pool_4 = pools
         x = self.decoder(x)
-        x = F.interpolate(
-            x, scale_factor=2
-        )  
-        x = torch.cat(
-            [x, pool_4], dim=1
-        )  
-        x = F.interpolate(
-            x, scale_factor=2
-        )  
-        x = torch.cat([x, pool_3], dim=1)  
-        x = F.interpolate(x, scale_factor=2)  
-        x = F.interpolate(x, scale_factor=2)  
+        x = F.interpolate(x, scale_factor=2)
+        x = torch.cat([x, pool_4], dim=1)
+        x = F.interpolate(x, scale_factor=2)
+        x = torch.cat([x, pool_3], dim=1)
+        x = F.interpolate(x, scale_factor=2)
+        x = F.interpolate(x, scale_factor=2)
         return self.transpose_layer(x)
+
 
 class TableDecoder(ColumnDecoder):
     """
@@ -124,9 +117,10 @@ class TableDecoder(ColumnDecoder):
 
         super().__init__(num_classes)
         self.decoder = nn.Sequential(
-            nn.Conv2d(512, 512, kernel_size=1),  
+            nn.Conv2d(512, 512, kernel_size=1),
             nn.ReLU(inplace=True),
         )
+
 
 class Lightning_TableNet(pl.LightningModule):
     """Create TableNet Pytorch Lightning model using the TableNet model."""
