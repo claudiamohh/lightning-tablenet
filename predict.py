@@ -14,8 +14,8 @@ from skimage.morphology import closing, square, convex_hull_image
 from skimage.transform import resize
 from skimage.util import invert
 
-from model import Lightning_TableNet
-from metrics import DiceLoss
+from models.model import Lightning_TableNet
+from models.metrics import DiceLoss
 
 class Predict_image:
     def __init__(self, checkpoint_path: str, transforms: Compose, threshold: float = 0.5, per: float = 0.005):
