@@ -8,8 +8,8 @@ from pytorch_lightning.callbacks import (
     EarlyStopping,
     LearningRateMonitor,
 )
-from dataset import Lightning_MarmotDataset
-from model import Lightning_TableNet
+from datasets.dataset import Lightning_MarmotDataset
+from models.model import Lightning_TableNet
 
 
 image_size = (896, 896)
@@ -23,7 +23,7 @@ train_transform = A.Compose(
         A.Normalize(),
         ToTensorV2(),
     ]
-
+    )
 
 test_transform = A.Compose(
     [A.Resize(*image_size, always_apply=True), A.Normalize(), ToTensorV2()]
