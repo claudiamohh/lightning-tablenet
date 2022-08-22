@@ -4,6 +4,7 @@ from typing import List
 import click
 import numpy as np
 import pandas as pd
+import pytesseract
 from albumentations import Compose
 from PIL import Image
 from pytesseract import image_to_string
@@ -17,7 +18,8 @@ from skimage.util import invert
 from models.model import Lightning_TableNet
 from models.metrics import DiceLoss
 
-class Predict_image:
+
+class PredictImage:
     def __init__(self, checkpoint_path: str, transforms: Compose, threshold: float = 0.5, per: float = 0.005):
         """Predict images using pre-trained TableNet model
 
