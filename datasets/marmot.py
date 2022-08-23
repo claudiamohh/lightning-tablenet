@@ -80,7 +80,7 @@ class MarmotDataset(Dataset):
         return image, mask_table, mask_column
 
 
-class Lightning_MarmotDataset(pl.LightningDataModule):
+class LightningMarmotDataset(pl.LightningDataModule):
     """To create a Lightning Marmot Dataset from Marmot Dataset"""
 
     def __init__(
@@ -92,7 +92,7 @@ class Lightning_MarmotDataset(pl.LightningDataModule):
         num_workers: int = 4,
     ):
         """
-        Formatting Lightning_MarmotDataset and allowing Lightning_MarmotDataset to initialize the attributes.
+        Formatting LightningMarmotDataset and allowing LightningMarmotDataset to initialize the attributes.
         The following attributes are: data, train_transform, test_transform, batch_size and num_workers.
 
         Args:
