@@ -14,9 +14,9 @@ The task here is to extract tables from annotated pages where it will be able to
 
 # Marmot Dataset 
 
-The original Marmot dataset contains both English and Chinese annotated pages, but for this model, only the English pages are used. Image data is in .bmp (bitmap image file) format and there are 509 different images in the dataset whereas there are 510 column and table masks files. However, cleaning up of data is not required as it does not affect the training of model. This dataset containing images, column masks and table masks, can be found in the `data` directory in data.zip. For more details of the dataset, it can be explored in Marmot_EDA.ipynb. 
+The original Marmot dataset contains both English and Chinese annotated pages, but for this model, only the English pages are used. Image data is in .bmp (bitmap image file) format and there are 509 different images in the dataset whereas there are 510 column and table masks files. However, cleaning up of data is not required as it does not affect the training of model. This dataset containing images, column masks and table masks, can be found in the `data` directory in `data.zip`. For more details of the dataset, it can be explored in `Marmot_EDA.ipynb`. 
 
-In dataset.py, Lightning_MarmotDataset() is used to train the dataset with pytorch lightning. 
+In `dataset.py`, Lightning_MarmotDataset() is used to train the dataset with pytorch lightning. 
 
 # Model Weights 
 
@@ -26,13 +26,13 @@ The model is trained with a pretrained vgg19 model as the enocder and creates ta
 |-------|---------------|-----------------|---------------------------|----------------------------|
 |tablenet_baseline_adam_gradclipping| 56 | 0.212 | 0.753 | 0.689 | 
 
-For a better understanding of the pretrained VGG19 model, refer to vgg19_understanding.ipynb in `notebooks' directory. 
+For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks' directory. 
 
-metrics.py contains the loss function, Dice Loss and an evaluation metric, Binary Mean IOU. 
+`metrics.py` contains the loss function, Dice Loss and an evaluation metric, Binary Mean IOU. 
 
 Users are to create a new directory `pretrained_model` and save the model weights inside. If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
 
-In model.py, Lightning_TableNet() creates a pytorch lightning model for training. 
+In `model.py`, Lightning_TableNet() creates a pytorch lightning model for training. 
 
 # Getting Started 
 
