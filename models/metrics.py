@@ -1,6 +1,8 @@
 import torch
 from torch import nn, optim
 
+EPSILON = 1e-15
+
 class DiceLoss(nn.Module):
     """
     Defining Loss function using Dice Loss.
