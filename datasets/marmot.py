@@ -86,7 +86,7 @@ class LightningMarmotDataset(pl.LightningDataModule):
     def __init__(
         self,
         data_dir: str = "/data",
-        train_augmentatioon: Compose = None,
+        train_augmentation: Compose = None,
         test_processing: Compose = None,
         batch_size: int = 8,
         num_workers: int = 2,
