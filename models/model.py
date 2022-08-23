@@ -3,7 +3,7 @@ import torch
 from torch import nn, optim
 from torch.nn import functional as F
 from torchvision.models import vgg19, vgg19_bn
-from models.metrics import DiceLoss
+from .metrics import DiceLoss, binary_mean_iou
 
 EPSILON = 1e-15
 
