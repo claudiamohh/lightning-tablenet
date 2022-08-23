@@ -15,7 +15,7 @@ from skimage.morphology import closing, square, convex_hull_image
 from skimage.transform import resize
 from skimage.util import invert
 
-from models.model import LightningTableNet
+from models.tablenet import LightningTableNet
 from models.metrics import DiceLoss
 
 

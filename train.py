@@ -9,7 +9,7 @@ from pytorch_lightning.callbacks import (
     LearningRateMonitor,
 )
 from datasets.dataset import LightningMarmotDataset
-from models.model import LightningTableNet
+from models.tablenet import LightningTableNet
 
 
 image_size = (896, 896)
