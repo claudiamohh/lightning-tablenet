@@ -29,7 +29,7 @@ test_transform = A.Compose(
     [A.Resize(*image_size, always_apply=True), A.Normalize(), ToTensorV2()]
 )
 
-dataset = LightningMarmotDataset(data_dir="./data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=1)
+dataset = LightningMarmotDataset(data_dir="./data/Marmot_data/", train_augmentation=train_transform, test_processing=test_transform, batch_size=1)
 
 model = LightningTableNet(num_class=1, encoder='vgg')
 
