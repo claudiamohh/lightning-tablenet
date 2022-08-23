@@ -9,7 +9,7 @@ from pytorch_lightning.callbacks import (
     LearningRateMonitor,
 )
 from datasets.dataset import Lightning_MarmotDataset
-from models.model import Lightning_TableNet
+from models.model import LightningTableNet
 
 
 image_size = (896, 896)
@@ -31,7 +31,7 @@ test_transform = A.Compose(
 
 dataset = Lightning_MarmotDataset(data_dir="./data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=1)
 
-model = Lightning_TableNet(num_class=1, encoder='vgg')
+model = LightningTableNet(num_class=1, encoder='vgg')
 
 checkpoint_callback = ModelCheckpoint(monitor='val_loss', save_top_k=1, save_last=True, mode='min')      
 early_stop_callback = EarlyStopping(monitor='val_loss', mode='min', patience=10)  

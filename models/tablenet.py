@@ -122,7 +122,7 @@ class TableDecoder(ColumnDecoder):
         )
 
 
-class Lightning_TableNet(pl.LightningModule):
+class LightningTableNet(pl.LightningModule):
     """Create TableNet Pytorch Lightning model using the TableNet model."""
 
     def __init__(self, num_class: int = 1, encoder="vgg"):
@@ -148,9 +148,9 @@ class Lightning_TableNet(pl.LightningModule):
         Returns (Tuple[tensor, tensor]): Table, Column prediction.
 
         Usage example:
-            model = Lightning_TableNet()
+            model = LightningTableNet()
             output = model(torch.rand(2, 3, 864, 864)
-                >>([tensor], [tensor])
+            >>([tensor, tensor])
         """
         return self.model(batch)
 

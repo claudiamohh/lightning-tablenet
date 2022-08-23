@@ -15,7 +15,7 @@ from skimage.morphology import closing, square, convex_hull_image
 from skimage.transform import resize
 from skimage.util import invert
 
-from models.model import Lightning_TableNet
+from models.model import LightningTableNet
 from models.metrics import DiceLoss
 
 
@@ -33,7 +33,7 @@ class PredictImage:
         self.threshold = threshold
         self.per = per
 
-        self.model = Lightning_TableNet.load_from_checkpoint(checkpoint_path)   #restore TableNet model from the checkpointed state (model with gradient clipping)
+        self.model = LightningTableNet.load_from_checkpoint(checkpoint_path)   #restore TableNet model from the checkpointed state (model with gradient clipping)
         self.model.eval()     #Turn off specific layers of the model for evaluation 
         self.model.requires_grad_(False)    #Freezing parameters of model 
     
