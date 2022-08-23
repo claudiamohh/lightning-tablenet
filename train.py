@@ -29,22 +29,20 @@ test_transform = A.Compose(
     [A.Resize(*image_size, always_apply=True), A.Normalize(), ToTensorV2()]
 )
 
-dataset = Lightning_MarmotDataset(data_dir="C:/Users/Claudia/Desktop/git/lightning_tablenet/data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=2)
+dataset = Lightning_MarmotDataset(data_dir="./data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=2)
 
 model = Lightning_TableNet(num_class=1, encoder='vgg')
 
-EXPERIMENT_NAME = f"{model.__class__.name__}"
+checkpoint_callback = ModelCheckpoint(monitor='val_loss', save_top_k=1, save_last=True, mode='min')      
 
-checkpoint_callback = ModelCheckpoint(monitor='validation_loss', save_top_k=1, save_last=True, mode='min')      
-
-early_stop_callback = EarlyStopping(monitor='validaton_loss', mode='min', patience=10)  
+early_stop_callback = EarlyStopping(monitor='val_loss', mode='min', patience=10)  
 
 lr_monitor = LearningRateMonitor(logging_interval='step')   
 
 trainer = pl.Trainer(accumulate_grad_batches=2,
                     gradient_clip_val=0.5, 
                     callbacks=[lr_monitor, checkpoint_callback, early_stop_callback], 
-                    logger=TensorBoardLogger('lightning_tablenet', name="tablenet_baseline_adam"), 
+                    logger=TensorBoardLogger('lightning_tablenet', name="tablenet_baseline_adam_gradclipping"), 
                     max_epochs=5000,
                     gpus=1 if torch.cuda.is_available() else None)  
 
