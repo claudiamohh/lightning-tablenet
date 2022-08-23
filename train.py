@@ -8,7 +8,7 @@ from pytorch_lightning.callbacks import (
     EarlyStopping,
     LearningRateMonitor,
 )
-from datasets.dataset import LightningMarmotDataset
+from datasets.marmot import LightningMarmotDataset
 from models.tablenet import LightningTableNet
 
 
