@@ -89,7 +89,7 @@ class LightningMarmotDataset(pl.LightningDataModule):
         train_transform: Compose = None,
         test_transform: Compose = None,
         batch_size: int = 8,
-        num_workers: int = 4,
+        num_workers: int = 2,
     ):
         """
         Formatting LightningMarmotDataset and allowing LightningMarmotDataset to initialize the attributes.
