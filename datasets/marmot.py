@@ -75,7 +75,7 @@ class MarmotDataset(Dataset):
             sample = self.transforms(image=image, mask=mask)
 
         image = sample["image"]
-        mask_table = sample["mask"][:, :, 1].unsqueeze(0)
+        mask_table = sample["mask"][:, :, 0].unsqueeze(0)
         mask_column = sample["mask"][:, :, 1].unsqueeze(0)
         return image, mask_table, mask_column
 
