@@ -100,13 +100,13 @@ class LightningMarmotDataset(pl.LightningDataModule):
             train_transform (Optional[Compose]): Albumentations to be applied on training dataset.
             test_transform (Optional[Compose]): Alumentations to be applied on validation and testing dataset.
             batch_size (int): Define batch size, by default: 8
-            num_worker(int): Define number of works to process data, by default: 4
+            num_worker(int): Define number of works to process data, by default: 2
         """
 
         super().__init__()
         self.data = list(Path(data_dir).rglob("*.bmp"))
-        self.train_transform = train_transform
-        self.test_transform = test_transform
+        self.train_augmentation = train_augementation
+        self.test_processing = test_processing
         self.batch_size = batch_size
         self.num_workers = num_workers
 
@@ -130,13 +130,13 @@ class LightningMarmotDataset(pl.LightningDataModule):
         test_size = slice(int(n_samples * 0.9), n_samples)
 
         self.dataset_train = MarmotDataset(
-            self.data[train_size], transforms=self.train_transform
+            self.data[train_size], transforms=self.train_augmentation
         )
         self.dataset_val = MarmotDataset(
-            self.data[val_size], transforms=self.test_transform
+            self.data[val_size], transforms=self.test_processing
         )
         self.dataset_test = MarmotDataset(
-            self.data[test_size], transforms=self.test_transform
+            self.data[test_size], transforms=self.test_processing
         )
 
     def train_dataloader(self, *args, **kwargs) -> DataLoader:
