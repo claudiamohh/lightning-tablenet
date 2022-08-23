@@ -29,14 +29,12 @@ test_transform = A.Compose(
     [A.Resize(*image_size, always_apply=True), A.Normalize(), ToTensorV2()]
 )
 
-dataset = Lightning_MarmotDataset(data_dir="./data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=2)
+dataset = Lightning_MarmotDataset(data_dir="./data/Marmot_data/", train_transform=train_transform, test_transform=test_transform, batch_size=1)
 
 model = Lightning_TableNet(num_class=1, encoder='vgg')
 
 checkpoint_callback = ModelCheckpoint(monitor='val_loss', save_top_k=1, save_last=True, mode='min')      
-
 early_stop_callback = EarlyStopping(monitor='val_loss', mode='min', patience=10)  
-
 lr_monitor = LearningRateMonitor(logging_interval='step')   
 
 trainer = pl.Trainer(accumulate_grad_batches=2,
