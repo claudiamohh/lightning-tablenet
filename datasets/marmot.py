@@ -86,8 +86,8 @@ class LightningMarmotDataset(pl.LightningDataModule):
     def __init__(
         self,
         data_dir: str = "/data",
-        train_transform: Compose = None,
-        test_transform: Compose = None,
+        train_augmentatioon: Compose = None,
+        test_processing: Compose = None,
         batch_size: int = 8,
         num_workers: int = 2,
     ):
@@ -105,7 +105,7 @@ class LightningMarmotDataset(pl.LightningDataModule):
 
         super().__init__()
         self.data = list(Path(data_dir).rglob("*.bmp"))
-        self.train_augmentation = train_augementation
+        self.train_augmentation = train_augmentation
         self.test_processing = test_processing
         self.batch_size = batch_size
         self.num_workers = num_workers
