@@ -2,7 +2,8 @@
 
 This repository consists of a Pytorch Lightning implementation of Tablenet https://arxiv.org/pdf/2001.01469.pdf. The end product of this repository is a gradio application where it returns the contents of the tables using OCR tesseract. 
 
-This repository includes 3 notebooks (for a better understading of the dataset and pretrained model used) and 6 scripts. 
+This repository includes 3 notebooks (for a better understanding of the dataset and pretrained model used) and 6 scripts. 
+
 The notebooks are: 
 1. Marmot_EDA.ipynb
 2. albumentation.ipynb
@@ -10,13 +11,34 @@ The notebooks are:
 
 # Introduction 
 
-The task here is to extract tables from annotated pages where it will be able to return the content in the tables. Firstly, training of model is needed which detects the table and column regions in each image and create masks. Secondly, we use OCR tesseract to predict the content in the detected table and column masks. Lastly, with the predictions, we create an appplication using Gradio where users are able to input an image and retrieve an output of the tables in a dataframe format. 
+The task here is to extract tables from the dataset using the trained model, and return the predicted content of each table and column in a dataframe. 
+
+The model takes in image pages, predicts and creates table and column masks called labels_table and label_column respectively. Binary mean IOU evaluates the model by comparing labels_table and labels_column with ground truth masks. With the best trained model chosen, it then predicts the content of these created masks using OCR tesseract. Lastly, an appplication is created using Gradio where users are able to input an image and retrieve a table of the content in a dataframe format. 
 
 # Marmot Dataset 
 
-The original Marmot dataset contains both English and Chinese annotated pages, but for this model, only the English pages are used. Image data is in .bmp (bitmap image file) format and there are 509 different images in the dataset whereas there are 510 column and table masks files. However, cleaning up of data is not required as it does not affect the training of model. This dataset containing images, column masks and table masks, can be found in the `data` directory in `data.zip`. For more details of the dataset, it can be explored in `Marmot_EDA.ipynb`. 
+This dataset contains annotated English pages for table recognition. Image data is in .bmp (bitmap image file) format and there are 509 different images in the dataset whereas there are 510 column and table masks files. While studying the dataset in `Marmot_EDA.ipynb`, there is an error such that the table_mask displays more than one table when the image has only one table. 
 
-In `dataset.py`, Lightning_MarmotDataset() is used to train the dataset with pytorch lightning. 
+The dataset includes images, column masks and table masks, which can be found in the `data` directory in `data.zip`.  
+
+This is an example of how the dataset looks like after unzipping (refer to `Execution` on how to unzip file): 
+
+```
+└── lightning-tablenet/
+    └── data/
+        ├── Marmot_data/
+        │   ├── 10.1.1.1.2006_3.bmp
+        │   ├── 10.1.1.1.2006_3.xml
+        │   ├── 10.1.1.1.2044_7.bmp
+        │   └── 10.1.1.1.2044_7.xml
+        ├── table_mask/
+        │   ├── 10.1.1.1.2006_3.bmp
+        │   └── 10.1.1.1.2044_7.bmp
+        └── column_mask/
+            ├── 10.1.1.1.2006_3.bmp
+            └── 10.1.1.1.2044_7.bmp
+```
+For more details of the dataset, it can be explored in `Marmot_EDA.ipynb`. 
 
 # Model Weights 
 
@@ -26,15 +48,16 @@ The model is trained with a pretrained vgg19 model as the enocder and creates ta
 |-------|---------------|-----------------|---------------------------|----------------------------|
 |tablenet_baseline_adam_gradclipping| 56 | 0.212 | 0.753 | 0.689 | 
 
-For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks' directory. 
+For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks' directory. In this notebook, the last classifier layer of VGG19 is replaced with 10 output classes to suit the training of MNIST dataset. 
 
-`metrics.py` contains the loss function, Dice Loss and an evaluation metric, Binary Mean IOU. 
-
-Users are to create a new directory `pretrained_model` and save the model weights inside. If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
-
-In `model.py`, Lightning_TableNet() creates a pytorch lightning model for training. 
+Users are to create a new directory `pretrained_model` and save the model weights inside (refer to `Getting Started` Section). If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
 
 # Getting Started 
+
+To clone this repository: 
+```
+$ git clone https://github.com/claudiamohh/lightning-tablenet.git
+```
 
 To install and activate virtual environment:
 ```
@@ -52,7 +75,20 @@ To install requirements:
 $ pip install -r requirements.txt
 ```
 
+Steps to move model weights inside `pretrained_model` directory:
+1. Click on the link in `Model Weights` Section to download the file in Google Drive
+2. Create `pretrained_model` directory and move weights inside 
+```
+$ mkdir pretrained_model
+$ mv tablenet_baseline_adam_gradclipping.ckpt pretrained_model/
+```
+
 # Execution 
+
+To unzip the dataset, simply type the following command: 
+```
+$ unzip data/data.zip
+```
 
 To train the model, type the following command: 
 ```
