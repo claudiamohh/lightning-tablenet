@@ -8,7 +8,7 @@ from pytorch_lightning.callbacks import (
     EarlyStopping,
     LearningRateMonitor,
 )
-from torchmetrics.functional import accuracy
+from torch.nn import functional as F
 from datasets.marmot import LightningMarmotDataset
 from models.tablenet import LightningTableNet
 
