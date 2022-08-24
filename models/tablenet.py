@@ -110,8 +110,8 @@ class ColumnDecoder(nn.Module):
 
 class TableDecoder(ColumnDecoder):
     """
-    Table Decoder is responsible for segmenting out the tables from the image to
-    construct a table mask, inheriting from the ColumnDecoder class.
+    Table Decoder is responsible for segmenting out the tables from the image
+    to construct a table mask, inheriting from the ColumnDecoder class.
 
     Function creates one convolution layer, pass through forward function and
     returns transposed output.
