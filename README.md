@@ -50,7 +50,7 @@ The model is trained with a pretrained vgg19 model as the enocder and creates ta
 
 For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks' directory. In this notebook, the last classifier layer of VGG19 is replaced with 10 output classes to suit the training of MNIST dataset. 
 
-Users are to create a new directory `pretrained_model` and save the model weights inside (refer to `Getting Started` Section). If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
+Users are to create a new directory `pretrained_models` and save the model weights inside (refer to `Getting Started` Section). If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
 
 # Getting Started 
 
@@ -75,12 +75,12 @@ To install requirements:
 $ pip install -r requirements.txt
 ```
 
-Steps to move model weights inside `pretrained_model` directory:
+Steps to move model weights inside `pretrained_models` directory:
 1. Click on the link in `Model Weights` Section to download the file in Google Drive
-2. Create `pretrained_model` directory and move weights inside 
+2. Create `pretrained_models` directory and move weights inside 
 ```
-$ mkdir pretrained_model
-$ mv tablenet_baseline_adam_gradclipping.ckpt pretrained_model/
+$ mkdir pretrained_models
+$ mv tablenet_baseline_adam_gradclipping.ckpt pretrained_models/
 ```
 
 # Execution 
@@ -99,5 +99,7 @@ To create a gradio application, ensure that examples and model path has already 
 ```
 $ python gradio_demo.py
 ```
-
+# References 
+1. [OCR_tablenet](https://github.com/tomassosorio/OCR_tablenet)
+2. [TableNet-pytorch](https://github.com/tomassosorio/OCR_tablenet)
 
