@@ -1,10 +1,7 @@
 from collections import OrderedDict
 from typing import List
-
-import click
 import numpy as np
 import pandas as pd
-import pytesseract
 from albumentations import Compose
 from PIL import Image
 from pytesseract import image_to_string
@@ -14,9 +11,7 @@ from skimage.measure import label, regionprops
 from skimage.morphology import closing, square, convex_hull_image
 from skimage.transform import resize
 from skimage.util import invert
-
 from models.tablenet import LightningTableNet
-from models.metrics import DiceLoss
 
 
 class PredictImage:
