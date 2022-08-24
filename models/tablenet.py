@@ -1,6 +1,6 @@
 import pytorch_lightning as pl
 import torch
-from torch import nn, optim
+from torch import nn
 from torch.nn import functional as F
 from torchmetrics.functional import accuracy
 from torchvision.models import vgg19, vgg19_bn
