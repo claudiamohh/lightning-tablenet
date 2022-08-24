@@ -87,7 +87,7 @@ $ mv tablenet_baseline_adam_gradclipping.ckpt pretrained_models/
 
 To unzip the dataset, simply type the following command: 
 ```
-$ unzip data/data.zip
+$ cd data/ && unzip -q data.zip
 ```
 
 To train the model, type the following command: 
