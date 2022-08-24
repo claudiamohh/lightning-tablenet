@@ -45,4 +45,4 @@ gr.Interface(
     gr.Dataframe(type="pandas", label="Dataframe"),
     title="Pytorch Lightning TableNet Demo",
     examples=examples,
-).launch()
+).launch(server_name="0.0.0.0", server_port=7861)
