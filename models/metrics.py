@@ -1,4 +1,5 @@
 import torch
+from torch import nn 
 
 EPSILON = 1e-15
 
@@ -34,7 +35,8 @@ class DiceLoss(nn.Module):
 
         intersection = (inputs * targets).sum()
 
-        dice = (2.0 * intersection + smooth) / (inputs.sum() + targets.sum() + smooth)
+        dice = (2.0 * intersection + smooth) / (inputs.sum() + targets.sum() +
+                smooth)
 
         return 1 - dice
 
