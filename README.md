@@ -96,12 +96,12 @@ To train the model, type the following command:
 $ python train.py
 ```
 
-To create a gradio application as shown below, ensure that examples and model path has already been downloaded and type the following command: 
+To create a gradio application as shown below, ensure that `examples` and `model weights` have already been downloaded and type the following command: 
 ```
 $ python gradio_demo.py
 ```
 
-After running this command, users can visit `http://localhost:7861` to try out the demo. It is a user friendly demo where users are able to click to upload or drag images in the input componenet and returns a dataframe. 
+After running this command, users are able to visit `http://localhost:7861` to try out the demo. It is a user friendly demo where users are able to click to upload or drag images in the input componenet and returns a dataframe. 
 
 ![image](https://user-images.githubusercontent.com/107597583/186386498-567dd549-441c-4da5-8d85-5948c37f91b2.png)
 
