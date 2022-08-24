@@ -8,6 +8,7 @@ from .metrics import DiceLoss, binary_mean_iou
 
 EPSILON = 1e-15
 
+
 class TableNet(nn.Module):
     """
     Create a model with pre-trained layers of VGG-19 as the encoder.  Using an
@@ -25,7 +26,7 @@ class TableNet(nn.Module):
         Usage example:
             TableNet(num_class=1)
             >> vgg19 encoder is used
-            
+
             TableNet(num_class=1, encoder='vgg_bn')
             >> vgg19_bn encoder is used
         """
@@ -217,12 +218,10 @@ class LightningTableNet(pl.LightningModule):
         Returns: Tensor
         """
         samples, labels_table, labels_column = batch
-        output_table, output_column = self.forward(
-            samples
-        )  
+        output_table, output_column = self.forward(samples)
 
-        loss_table = self.dice_loss(output_table, labels_table)  
-        loss_column = self.dice_loss(output_column, labels_column)  
+        loss_table = self.dice_loss(output_table, labels_table)
+        loss_column = self.dice_loss(output_column, labels_column)
 
         self.log("train_loss_table", loss_table)
         self.log("train_loss_column", loss_column)
@@ -237,7 +236,7 @@ class LightningTableNet(pl.LightningModule):
 
     def configure_optimizers(self):
         """
-        Using Adam Optimizer with learning rate=0.0001 as the optimizer 
+        Using Adam Optimizer with learning rate=0.0001 as the optimizer
         """
         optimizer = torch.optim.Adam(self.parameters(), lr=0.0001)
 
