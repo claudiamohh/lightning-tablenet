@@ -10,9 +10,10 @@ EPSILON = 1e-15
 
 class TableNet(nn.Module):
     """
-    Create a TableNet model with pre-trained layers of VGG-19.
-    Using an encoder-decoder network architecture, conv1 to pool5 layers are used as common encoder layers,
-    two decoder branches (table and column) are emerged after the encoder layers.
+    Create a model with pre-trained layers of VGG-19 as the encoder.  Using an
+    encoder-decoder network architecture, conv1 to pool5 layers are used as
+    common encoder layers, two decoder branches (table and column) are then
+    emerged after the encoder layers.
     """
 
     def __init__(self, num_class: int = 1, encoder="vgg"):
@@ -23,9 +24,10 @@ class TableNet(nn.Module):
 
         Usage example:
             TableNet(num_class=1)
-                >> vgg19 encoder is used
+            >> vgg19 encoder is used
+            
             TableNet(num_class=1, encoder='vgg_bn')
-                >> vgg19_bn encoder is used
+            >> vgg19_bn encoder is used
         """
         super().__init__()
         self.encoder = (
@@ -46,7 +48,8 @@ class TableNet(nn.Module):
         self.column_decoder = ColumnDecoder(num_class)
 
     def forward(self, x):
-        """Forward pass that maps an input tensor to a prediction output tensor.
+        """
+        Forward pass that maps an input tensor to a prediction output tensor.
 
         Args:
             x (tensor): Batch of images to perform forward-pass.
@@ -56,7 +59,7 @@ class TableNet(nn.Module):
         Usage example:
             model = TableNet()
             output = model(torch.rand(2, 3, 864, 864)
-                >>([tensor], [tensor])
+            >>([tensor, tensor])
         """
         results = []
         for idx, layer in enumerate(self.encoder):
@@ -71,10 +74,12 @@ class TableNet(nn.Module):
 
 class ColumnDecoder(nn.Module):
     """
-    Column Decoder responsible for segmenting out the columns from the image and construct a Column Mask.
+    Column Decoder is responsible for segmenting out the columns from the image
+    to construct a column mask.
 
-    Function creates two convolution layers for inputs to pass through, upscaled by the given scale_factor,
-    pool3 and pool 4 to meet the original image dimension and returns the transposed output.
+    Function creates two convolution layers for inputs to pass through,
+    upscaled by the given scale_factor, pool3 and pool 4 to meet the original
+    image dimension and returns the transposed output.
     """
 
     def __init__(self, num_classes: int):
@@ -104,10 +109,11 @@ class ColumnDecoder(nn.Module):
 
 class TableDecoder(ColumnDecoder):
     """
-    Table Decoder responsible for segmenting out the tables from the image and construct a Table Mask,
-    inheriting from the ColumnDecoder class.
+    Table Decoder is responsible for segmenting out the tables from the image to
+    construct a table mask, inheriting from the ColumnDecoder class.
 
-    Function creates one convolution layer, pass through forward function and returns transposed output.
+    Function creates one convolution layer, pass through forward function and
+    returns transposed output.
     """
 
     def __init__(self, num_classes):
@@ -124,7 +130,9 @@ class TableDecoder(ColumnDecoder):
 
 
 class LightningTableNet(pl.LightningModule):
-    """Create TableNet Pytorch Lightning model using the TableNet model."""
+    """
+    Creates Pytorch Lightning TableNet model using TableNet class.
+    """
 
     def __init__(self, num_class: int = 1, encoder="vgg"):
         """
@@ -200,7 +208,7 @@ class LightningTableNet(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         """
-        Training TableNet model with Dataset
+        Training model with Marmot dataset
 
         Args:
             batch (List[Tensor]): Data for training.
@@ -211,11 +219,10 @@ class LightningTableNet(pl.LightningModule):
         samples, labels_table, labels_column = batch
         output_table, output_column = self.forward(
             samples
-        )  # Pass through forward function to train with model
+        )  
 
-        # Calculate loss of table and column
-        loss_table = self.dice_loss(output_table, labels_table)  # Table Loss
-        loss_column = self.dice_loss(output_column, labels_column)  # Column Loss
+        loss_table = self.dice_loss(output_table, labels_table)  
+        loss_column = self.dice_loss(output_column, labels_column)  
 
         self.log("train_loss_table", loss_table)
         self.log("train_loss_column", loss_column)
@@ -230,9 +237,7 @@ class LightningTableNet(pl.LightningModule):
 
     def configure_optimizers(self):
         """
-        Using Adam Optimizer with learning rate=0.0001
-
-        Returns: optimizer for pytorch lightning
+        Using Adam Optimizer with learning rate=0.0001 as the optimizer 
         """
         optimizer = torch.optim.Adam(self.parameters(), lr=0.0001)
 
@@ -241,7 +246,6 @@ class LightningTableNet(pl.LightningModule):
     def _log_images(
         self, mode, samples, labels_table, labels_column, output_table, output_column
     ):
-        """Log images to logger"""
 
         self.logger.experiment.add_images(
             f"{mode}_generated_images", samples[0:4], self.current_epoch
