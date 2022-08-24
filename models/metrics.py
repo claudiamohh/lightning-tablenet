@@ -1,13 +1,13 @@
 import torch
-from torch import nn, optim
 
 EPSILON = 1e-15
+
 
 class DiceLoss(nn.Module):
     """
     Defining Loss function using Dice Loss, widely used to calculate the
-    similarity between two images. 
-    
+    similarity between two images.
+
     Formula: 2(A intersect B)/(A + B)
     """
 
