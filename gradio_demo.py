@@ -43,6 +43,6 @@ gr.Interface(
     predict_function,
     gr.components.Image(type="pil"),
     gr.Dataframe(type="pandas", label="Dataframe"),
-    title="TableNet Demo",
+    title="Pytorch Lightning TableNet Demo",
     examples=examples,
 ).launch()
