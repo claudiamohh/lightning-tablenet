@@ -45,4 +45,4 @@ gr.Interface(
     gr.Dataframe(type="pandas", label="Dataframe"),
     title="TableNet Demo",
     examples=examples,
-).launch(share=True)
+).launch()
