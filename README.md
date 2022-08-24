@@ -13,7 +13,7 @@ The notebooks are:
 
 The task here is to extract tables from the dataset using the trained model, and return the predicted content of each table and column in a dataframe. 
 
-The model takes in image pages, predicts and creates table and column masks called labels_table and label_column respectively. Binary mean IOU evaluates the model by comparing labels_table and labels_column with ground truth masks. With the best trained model chosen, it then predicts the content of these created masks using OCR tesseract. Lastly, an appplication is created using Gradio where users are able to input an image and retrieve a table of the content in a dataframe format. 
+The model takes in image pages, predicts and creates table and column masks called output_table and output_column respectively. Binary mean IOU evaluates the model by comparing output_table and output_column with ground truth masks. With the best trained model chosen, it then predicts the content of these created masks using OCR tesseract. Lastly, an appplication is created using Gradio where users are able to input an image and retrieve a table of the content in a dataframe format. 
 
 # Marmot Dataset 
 
@@ -133,7 +133,7 @@ To create a gradio application as shown below, ensure that `examples` and `model
 $ python gradio_demo.py
 ```
 
-After running this command, users are able to visit `http://localhost:7861` to try out the demo. It is a user friendly demo where users are able to click to upload or drag images in the input componenet and returns a dataframe. 
+After running this command, users are able to visit `http://localhost:7861` to try out the demo. It is a user friendly demo where users are able to click to upload or drag images in the input component and returns a dataframe. 
 
 ![image](https://user-images.githubusercontent.com/107597583/186386498-567dd549-441c-4da5-8d85-5948c37f91b2.png)
 
