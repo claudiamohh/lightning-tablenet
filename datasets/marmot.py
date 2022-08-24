@@ -17,7 +17,8 @@ class MarmotDataset(Dataset):
         """
         Args:
             data (List[Path]): A list of Path
-            transforms (Optional[Compose]): Optional albumentations to be applied on a sample.
+            transforms (Optional[Compose]): Optional albumentations to be
+            applied on a sample.
         """
         self.data = data
         self.transforms = transforms
@@ -28,7 +29,7 @@ class MarmotDataset(Dataset):
 
     def __getitem__(self, item):
         """
-        Function to return a sample from the Marmot dataset given an index after undergoing albumentations.
+        Function to return a sample from the Marmot dataset given an index.
 
         Args:
             item (int): unique filenames
@@ -47,9 +48,9 @@ class MarmotDataset(Dataset):
                 ├── 200_12.bmp
                 └── 200_13.bmp
 
-            dataset = MarmotDataset(data=list(Path('/data/Marmot_data/').rglob("*.bmp")))
-            dataset[0]
-            >> (array([tensor], array[tensor], array[tensor])
+            data=MarmotDataset(data=list(Path('/data/Marmot_data/').rglob("*.bmp")))
+            data[0]
+            >> ([tensor], [tensor], [tensor])
         """
 
         unique_filename = self.data[item].stem
@@ -92,15 +93,19 @@ class LightningMarmotDataset(pl.LightningDataModule):
         num_workers: int = 2,
     ):
         """
-        Formatting LightningMarmotDataset and allowing LightningMarmotDataset to initialize the attributes.
-        The following attributes are: data, train_transform, test_transform, batch_size and num_workers.
+        Formatting LightningMarmotDataset and allowing LightningMarmotDataset
+        to initialize the attributes.  The following attributes are: data,
+        train_transform, test_transform, batch_size and num_workers.
 
-        Args:
+        Args: 
             data_dir (str): Dataset Directory
-            train_transform (Optional[Compose]): Albumentations to be applied on training dataset.
-            test_transform (Optional[Compose]): Alumentations to be applied on validation and testing dataset.
-            batch_size (int): Define batch size, by default: 8
-            num_worker(int): Define number of works to process data, by default: 2
+            train_augmentation (Optional[Compose]): Albumentations to be
+            applied on training dataset.  
+            test_processing (Optional[Compose]): Alumentations to be applied on
+            validation and testing dataset.  
+            batch_size (int): Define batch size, by default: 8 
+            num_worker(int): Define number of workers to process data, by
+            default: 2
         """
 
         super().__init__()
@@ -113,14 +118,15 @@ class LightningMarmotDataset(pl.LightningDataModule):
         self.setup()
 
     def setup(self, stage: str = None) -> None:
-        """Function to create training, validation and test sets by slicing dataset.
+        """Function to create training, validation and test sets by slicing
+        dataset.
 
-        Training set: first 80% of total sample
-        Validation set: next 10% of total sample (80%-90%)
+        Training set: first 80% of total sample 
+        Validation set: next 10% of total sample (80%-90%) 
         Testing set: last 10% of the sample
 
-        Args:
-            stage(Optional[str]): Used to seperate setup logic for trainer.fit and trainer.test
+        Args: stage(Optional[str]): Used to seperate setup logic for
+        trainer.fit and trainer.test
         """
 
         n_samples = len(self.data)
