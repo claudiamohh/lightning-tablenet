@@ -100,7 +100,9 @@ To create a gradio application, ensure that examples and model path has already 
 ```
 $ python gradio_demo.py
 ```
-After running this command, users can visit `http://localhost:7861` to try out the demo. The demo looks like this where users are able to click to upload or drag images in the input componenet. 
+After running this command, users can visit `http://localhost:7861` to try out the demo. The demo looks like this where users are able to click to upload or drag images in the input componenet and it will return an dataframe of the content. 
+![Screenshot 2022-08-24 173121](https://user-images.githubusercontent.com/107597583/186385863-926948f6-d05a-4450-8a2c-2246d765930f.png)
+![Screenshot 2022-08-24 173202](https://user-images.githubusercontent.com/107597583/186386131-392d7866-91fe-4bb9-9655-ac260f1f4d29.png)
 
 # References 
 1. [OCR_tablenet](https://github.com/tomassosorio/OCR_tablenet)
