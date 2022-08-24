@@ -5,9 +5,10 @@ EPSILON = 1e-15
 
 class DiceLoss(nn.Module):
     """
-    Defining Loss function using Dice Loss.
-
-    Dice Loss formula = 2(A intersect B)/(A + B)
+    Defining Loss function using Dice Loss, widely used to calculate the
+    similarity between two images. 
+    
+    Formula: 2(A intersect B)/(A + B)
     """
 
     def __init__(self):
@@ -20,11 +21,12 @@ class DiceLoss(nn.Module):
         Args:
             input (tensor): Output from the forward pass.
             targets (tensor): Original value
-            smooth (float): Value to smooth the loss. (Avoid division by zero, when input=tensors=0)
+            smooth (float): Value to avoid division by zero
 
         Usage example:
-            DiceLoss(inputs, targets)
-                >> (tensor): Dice loss.
+            diceloss = DiceLoss()
+            loss = diceloss(inputs, target)
+            >> (tensor): Dice loss.
         """
 
         inputs = inputs.view(-1)
@@ -51,7 +53,7 @@ def binary_mean_iou(inputs, targets):
 
     Usage example:
         binary_mean_iou(inputs, target)
-            >> (tensor)
+        >> (tensor)
     """
     output = (inputs > 0).int()
 
