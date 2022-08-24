@@ -1,9 +1,6 @@
 from typing import List
 from pathlib import Path
-
 import numpy as np
-from albumentations.pytorch import ToTensorV2
-import albumentations as A
 import pytorch_lightning as pl
 from albumentations import Compose
 from PIL import Image
@@ -97,13 +94,13 @@ class LightningMarmotDataset(pl.LightningDataModule):
         to initialize the attributes.  The following attributes are: data,
         train_transform, test_transform, batch_size and num_workers.
 
-        Args: 
+        Args:
             data_dir (str): Dataset Directory
             train_augmentation (Optional[Compose]): Albumentations to be
-            applied on training dataset.  
+            applied on training dataset.
             test_processing (Optional[Compose]): Alumentations to be applied on
-            validation and testing dataset.  
-            batch_size (int): Define batch size, by default: 8 
+            validation and testing dataset.
+            batch_size (int): Define batch size, by default: 8
             num_worker(int): Define number of workers to process data, by
             default: 2
         """
@@ -121,8 +118,8 @@ class LightningMarmotDataset(pl.LightningDataModule):
         """Function to create training, validation and test sets by slicing
         dataset.
 
-        Training set: first 80% of total sample 
-        Validation set: next 10% of total sample (80%-90%) 
+        Training set: first 80% of total sample
+        Validation set: next 10% of total sample (80%-90%)
         Testing set: last 10% of the sample
 
         Args: stage(Optional[str]): Used to seperate setup logic for
