@@ -57,6 +57,7 @@ Users are to create a new directory `pretrained_models` and save the model weigh
 To clone this repository: 
 ```
 $ git clone https://github.com/claudiamohh/lightning-tablenet.git
+$ cd lightning-tablenet
 ```
 
 To install and activate virtual environment:
@@ -99,6 +100,8 @@ To create a gradio application, ensure that examples and model path has already 
 ```
 $ python gradio_demo.py
 ```
+After running this command, users can visit `http://localhost:7861` to try out the demo. The demo looks like this where users are able to click to upload or drag images in the input componenet. 
+
 # References 
 1. [OCR_tablenet](https://github.com/tomassosorio/OCR_tablenet)
 2. [TableNet-pytorch](https://github.com/tomassosorio/OCR_tablenet)
