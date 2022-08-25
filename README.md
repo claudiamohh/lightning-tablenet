@@ -42,7 +42,7 @@ For more details of the dataset, it can be explored in `Marmot_EDA.ipynb`.
 
 # Model Weights 
 
-The model is trained with a pretrained vgg19 model as the enocder and creates table and column decoders respectively. The model weights is also available [here]('https://drive.google.com/file/d/1aJfBOwOk6F2wRS0wRevZFGB9cZkDv_Sy/view?usp=sharing') where it was trained for 56 epochs with gradient clipping. 
+The model is trained with a pretrained vgg19 model as the enocder and creates table and column decoders respectively. The model weights is also available [here](https://drive.google.com/file/d/1aJfBOwOk6F2wRS0wRevZFGB9cZkDv_Sy/view?usp=sharing) where it was trained for 56 epochs with gradient clipping. 
 
 | Model | No. of epochs | Validation Loss | Binary mean IOU for table | Binary mean IOU for column |
 |-------|---------------|-----------------|---------------------------|----------------------------|
