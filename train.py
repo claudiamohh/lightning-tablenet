@@ -39,7 +39,11 @@ dataset = LightningMarmotDataset(
 model = LightningTableNet(num_class=1, encoder="vgg")
 
 checkpoint_callback = ModelCheckpoint(
-    monitor="val_loss", save_top_k=1, save_last=True, mode="min", filename="tablenet_baseline_adam-{epoch:02d}-{val_loss:.6f}-{val_binary_mean_iou_column:.6f}--{val_binary_mean_iou_table:.6f}--{val_accuracy_column:.4f}--{val_accuracy_table:.4f}"
+    monitor="val_loss",
+    save_top_k=1,
+    save_last=True,
+    mode="min",
+    filename="tablenet_baseline_adam-{epoch:02d}-{val_loss:.6f}-{val_binary_mean_iou_column:.6f}--{val_binary_mean_iou_table:.6f}--{val_accuracy_column:.4f}--{val_accuracy_table:.4f}",
 )
 early_stop_callback = EarlyStopping(monitor="val_loss", mode="min", patience=10)
 lr_monitor = LearningRateMonitor(logging_interval="step")
