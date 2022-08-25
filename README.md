@@ -127,8 +127,6 @@ $ python gradio_demo.py
 
 After running this command, users are able to visit `http://localhost:7861` to try out the demo. It is a user friendly demo where users are able to click to upload or drag images in the input component and returns a dataframe. 
 
-![image](https://user-images.githubusercontent.com/107597583/186386498-567dd549-441c-4da5-8d85-5948c37f91b2.png)
-
 ![Screenshot 2022-08-24 173202](https://user-images.githubusercontent.com/107597583/186386131-392d7866-91fe-4bb9-9655-ac260f1f4d29.png)
 
 # References 
