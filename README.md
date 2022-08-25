@@ -54,7 +54,7 @@ Users are to create a new directory `pretrained_models` and save the model weigh
 
 # Model Results 
 
-Each model is trained 3 times for accuracy. Following are the results of the different models: 
+Each model with different paramenters is trained 3 times. Following are the results of the different models: 
 
 | Model | No. of epochs | Validation Loss | Binary mean IOU for table | Binary mean IOU for column | 
 |-------|---------------|-----------------|---------------------------|----------------------------|
@@ -82,7 +82,7 @@ Each model is trained 3 times for accuracy. Following are the results of the dif
 |22. tablenet_baseline_sgd_onecycelr_lowlr_2|91|0.804|0.161|0.233 |
 |23. tablenet_baseline_sgd_onecycelr_lowlr_3|37|0.648|0.177| 0.137| 
 
-Hence, `tablenet_baseline_adam_gradclipping_1` is used as the model weights as it has one of the lowest validation loss and decent values of binary mean IOU. 
+Hence, `tablenet_baseline_adam_gradclipping_1` is used as the model weights as it has the lowest validation loss and decent values of binary mean IOU. 
 
 # Getting Started 
 
