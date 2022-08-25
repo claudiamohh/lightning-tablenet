@@ -154,7 +154,6 @@ class LightningMarmotDataset(pl.LightningDataModule):
         return DataLoader(
             self.dataset_val,
             batch_size=self.batch_size,
-            shuffle=True,
             num_workers=self.num_workers,
         )
 
@@ -162,6 +161,5 @@ class LightningMarmotDataset(pl.LightningDataModule):
         return DataLoader(
             self.dataset_test,
             batch_size=self.batch_size,
-            shuffle=True,
             num_workers=self.num_workers,
         )
