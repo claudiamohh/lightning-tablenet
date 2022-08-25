@@ -54,7 +54,7 @@ Users are to create a new directory `pretrained_models` and save the model weigh
 
 # Model Results 
 
-Each model with different paramenters is trained 3 times. Following are the results of the different models: 
+Each model with different paramenters is trained 3 times. Following are the results of the best checkpoint: 
 
 | Model | No. of epochs | Validation Loss | Binary mean IOU for table | Binary mean IOU for column | 
 |-------|---------------|-----------------|---------------------------|----------------------------|
