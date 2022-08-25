@@ -2,13 +2,6 @@
 
 This repository consists of a Pytorch Lightning implementation of Tablenet https://arxiv.org/pdf/2001.01469.pdf. The end product of this repository is a gradio application where it returns the contents of the tables using OCR tesseract. 
 
-This repository includes 3 notebooks (for a better understanding of the dataset and pretrained model used) and 6 scripts. 
-
-The notebooks are: 
-1. Marmot_EDA.ipynb
-2. albumentation.ipynb
-3. vgg19_understanding.ipynb
-
 # Introduction 
 
 The task here is to extract tables from the dataset using the trained model, and return the predicted content of each table and column in a dataframe. 
