@@ -53,14 +53,14 @@ Each model with different paramenters is trained 3 times. Following are the resu
 |-------|---------------|-----------------|---------------------------|----------------------------|
 |1. tablenet_baseline_adam_1| 1 | 0.384 | 0.740 | 0.652 |
 |2. tablenet_baseline_adam-2| 4 | 0.361 | 0.750 | 0.650 | 
-|3. tablenet_baseline_adam_3| 28 | 0.298 | **0.807** | 0.697|
+|3. tablenet_baseline_adam_3| 28 | 0.298 | 0.807 | 0.697|
 |4. tablenet_baseline_adam_gradclipping_1| 56 | **0.212** | 0.753 | 0.689|
 |5. tablenet_baseline_adam_gradclipping_2| 25 | 0.225 | 0.682 | 0.709|
 |6. tablenet_baseline_adam_gradclipping_3| 24 | 0.220 | 0.756 | **0.717**|
 |7. tablenet_baseline_adam_gradclipping_weightdecay_1| 9 | 0.321 | 0.136 | 0.112|
 |8. tablenet_baseline_adam_gradclipping_weightdecay_2| 11 | 0.299 | 0.136 | 0.111|
 |9. tablenet_baseline_adam_gradclipping_weightdecay_3| 6 | 0.342 | 0.136 | 0.113|
-|10. tablenet_baseline_adam_lr_5e-5_1|19|0.286| 0.812| 0.707
+|10. tablenet_baseline_adam_lr_5e-5_1|19|0.286| **0.812**| 0.707
 |11. tablenet_baseline_adam_lr_5e-5_2|20|0.266| 0.572| 0.673
 |12. tablenet_baseline_adam_lr_5e-5_3|26|0.281|0.796| 0.715
 |13. tablenet_baseline_adam_transposed_1|0|0.456| 0.649| 0.651|
