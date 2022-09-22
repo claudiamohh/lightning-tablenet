@@ -41,7 +41,7 @@ The model is trained with a pretrained vgg19 model as the enocder and creates ta
 |-------|---------------|-----------------|---------------------------|----------------------------|
 |tablenet_baseline_adam_gradclipping| 56 | 0.212 | 0.753 | 0.689 | 
 
-For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks' directory. In this notebook, the last classifier layer of VGG19 is replaced with 10 output classes to suit the training of MNIST dataset. 
+For a better understanding of the pretrained VGG19 model, refer to `vgg19_understanding.ipynb` in `notebooks` directory. In this notebook, the last classifier layer of VGG19 is replaced with 10 output classes to suit the training of MNIST dataset. 
 
 Users are to create a new directory `pretrained_models` and save the model weights inside (refer to `Getting Started` Section). If you are training your own model, do rename it to `tablenet_baseline_adam_gradclipping.ckpt` to be able to run gradio_demo.py. 
 
